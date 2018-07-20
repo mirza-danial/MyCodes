@@ -1,0 +1,95 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="adminLayout.master.cs" Inherits="DatabaseProject.adminLayout" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    <!-- Style Sheet Link-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+    
+    <link id="layoutStylesheet" rel="stylesheet" type="text/css" href="css/main.css">
+    <title></title>
+    <style>
+      .la{
+          padding-top:28px !important;
+      } 
+    </style>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div>
+         
+              <nav class="navbar navbar-expand-sm bg-dark navbar-dark sticky-top">
+                <a class="navbar-brand" href="#"><img class="logo" src="images/logoshadow1.png"/ ></a>              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+                   <span class="navbar-toggler-icon"></span>
+              </button>
+               <div class="collapse navbar-collapse" id="collapsibleNavbar">
+              <ul class="navbar-nav">
+                 <li class="nav-item">
+                     <a class="nav-link " href="adminHome.aspx" id="HomeLink">HOME</a>
+                 </li>
+                <li role="separator" class="divider"></li>    
+                <li class="nav-item">
+                 
+                  <div class="dropdown">
+                                <h4 class="la dropdown-toggle nav-link" data-toggle="dropdown">MOVIES</h4>
+                                <div class="dropdown-menu">
+                                     <a class="dropdown-item " href="AddMovie.aspx">Add Movie</a>
+                                     <a class="dropdown-item " href="DeleteMovie.aspx">Delete Movie</a>
+                                     <a class="dropdown-item " href="AddShowtime.aspx">Add Showtime</a>
+                                     <a class="dropdown-item " href="DeleteShowtime.aspx">Delete Showtime</a>
+                                     <a class="dropdown-item " href="AddCinema.aspx">Add Cinema</a>                                   
+                                </div>
+                  </div> 
+                </li>
+                <li class="nav-item">
+                 <div class="dropdown">
+                                <h4 class="la dropdown-toggle nav-link" data-toggle="dropdown">CONCERTS</h4>
+                                <div class="dropdown-menu">
+                                     <a class="dropdown-item " href="AddConcert.aspx">Add Concert</a>
+                                     <a class="dropdown-item " href="DeleteConcert.aspx">Delete Concert</a>                                 
+                                </div>
+                  </div> 
+                </li >
+                <li class="nav-item">
+                   <div class="dropdown">
+                                <h4 class="la dropdown-toggle nav-link" data-toggle="dropdown">EVENTS</h4>
+                                <div class="dropdown-menu">
+                                     <a class="dropdown-item " href="AddEvent.aspx">Add Event</a>
+                                     <a class="dropdown-item " href="DeleteEvent.aspx">Delete Event</a>                                  
+                                </div>
+                  </div> 
+                </li>
+               
+              </ul>
+    
+              <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+               
+                            <div class="dropdown">
+                                <span class="fa fa-user fa-2x cart  dropdown-toggle" data-toggle="dropdown"></span>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="#">View Profile</a>
+                                    <asp:LinkButton CssClass="dropdown-item" ID="Log_Out" runat="server" onclick="Logout">Log out</asp:LinkButton>
+                                </div>
+                            </div> 
+              
+                    </li>
+                </ul>
+             </div>  
+            </nav>
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+    </form>
+</body>
+</html>
+

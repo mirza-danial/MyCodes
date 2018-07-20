@@ -1,0 +1,172 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Layout.Master.cs" Inherits="DatabaseProject.Layouy" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <!-- Bootstrap 4 Link-->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    <!-- Style Sheet Link-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+    
+    <link id="layoutStylesheet" rel="stylesheet" type="text/css" href="css/main.css">
+    
+    <title></title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark sticky-top">
+      <a class="navbar-brand" href="#"><img class="logo" src="images/logoshadow1.png"/ ></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+           <span class="navbar-toggler-icon"></span>
+      </button>
+       <div class="collapse navbar-collapse" id="collapsibleNavbar">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link " href="Home.aspx" id="HomeLink">HOME</a>
+        </li>
+        <li role="separator" class="divider"></li>    
+        <li class="nav-item">
+          <a class="nav-link" href="Events.aspx" id="EventLink" >SHOP</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="Contact_Us.aspx">CONTACT US</a>
+        </li>
+      </ul>
+    
+      <ul class="navbar-nav ml-auto">
+             <li class="nav-item">
+                <span class=" fa fa-bell fa-2x cart hide"  data-toggle="modal" data-target="#notification_modal"> <asp:Label ID="notificcationBadge" CssClass="badge badge-pill badge-danger " runat="server" ></asp:Label></span>
+            </li> 
+            <li class="nav-item">
+                <span class=" fa fa-shopping-cart fa-2x cart hide"  data-toggle="modal" data-target="#shopping_cart_modal"> </span>
+            </li>
+            <li class="nav-item">
+               
+                    <div class="dropdown">
+                        <span class="fa fa-user fa-2x cart  dropdown-toggle" data-toggle="dropdown"></span>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item nothide" href="Sign_In.aspx">Log In</a>
+                            <a class="dropdown-item nothide" href="Sign_Up.aspx">Sign Up</a>
+                            <a class="dropdown-item hide" href="ViewProfile.aspx">View Profile</a>
+                            <a class="dropdown-item hide" href="ChangePassword.aspx">Change password</a>
+                            <asp:LinkButton CssClass="dropdown-item hide" ID="Log_Out" runat="server" onclick="Logout_Click">Log out</asp:LinkButton>
+                            
+                        </div>
+                    </div> 
+              
+            </li>
+        </ul>
+     </div>  
+    </nav>
+      <!-- The Modal -->
+              <div class="modal fade" id="shopping_cart_modal">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+      
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                      <h4 class="modal-title">SHOPPING CART</h4>
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+        
+                    <!-- Modal body -->
+                      <asp:Label ID="Message" runat="server"></asp:Label>
+                    <div class="modal-body">
+                        <asp:Repeater ID="list" runat="server">
+                        <HeaderTemplate>
+                            <table class="table table-borderless">
+                                 <tr>
+                                     <th>Item Name</th>
+                                     <th>Quantity</th>
+                                     <th>Unit Cost</th>
+                                  </tr>
+                        </HeaderTemplate>
+                        <itemTemplate>
+                                  
+                                  <tr >
+                                      <td ><h6><%# Eval("Name") %></h6></td>
+                                      <td ><h6><%# Eval("Quantity") %></h6></td>
+                                      <td ><h6><%# Eval("UnitCost") %></h6></td>
+                                      <td > 
+                                          <asp:LinkButton CssClass="btn btn-danger" ID="DropItem" ToolTip='<%# Eval("ItemId") %>' OnClick="DropItem_Click" runat="server">
+                                              <i class="fa fa-close"></i>
+                                          </asp:LinkButton>
+                                      </td>
+                                  </tr>
+                                  
+                        </itemTemplate>
+                        <FooterTemplate>
+                            </table>
+                             <asp:LinkButton ID="ConfirmOrder" CssClass="btn btn-block btn-primary" ToolTip="Confirm Order" OnClick="ConfirmOrder_Click" runat="server">Confirm Order</asp:LinkButton>
+
+                            <asp:LinkButton ID="DropCart" CssClass="btn btn-block btn-danger" ToolTip="Drop Cart" OnClick="DropCart_Click" runat="server"><i class="fa fa-cart-arrow-down"></i></asp:LinkButton>
+                      
+                        </FooterTemplate>
+                        </asp:Repeater>
+                        
+                      <asp:ContentPlaceHolder ID="ShoppingCartPlaceholder" runat="server"></asp:ContentPlaceHolder>
+                    </div>
+                        
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    </div>
+        
+                  </div>
+                </div>
+              </div>
+
+           <div class="modal fade" id="notification_modal">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+      
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                      <h4 class="modal-title">Notifications</h4>
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+        
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <h3>Nearby Events & Concerts</h3>
+                        <asp:Label ID="NumOfEvents" runat="server"></asp:Label>
+                        <asp:Repeater ID="Notify" runat="server">
+                            <HeaderTemplate></HeaderTemplate>
+                            <ItemTemplate>
+                                <div class="media border border-left-0 border-right-0 border-top-0 p-3" >
+                                    <div class="media-body">
+                                        <h4><%# Eval("Name") %><small> <i><%# Eval("DayTime") %></i></small></h4>
+                                        <p><%# Eval("Venue") %></p>
+
+                                    </div>
+
+                                </div>
+                            </ItemTemplate>
+                       </asp:Repeater>
+                        <asp:ContentPlaceHolder ID="NotificationsPlaceholder" runat="server"></asp:ContentPlaceHolder>
+                  </div>
+        
+                    <!-- Modal footer -->
+                  
+        
+                  </div>
+                </div>
+              </div>
+  
+       
+     
+       <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+    </asp:ContentPlaceHolder>
+    </form>
+</body>
+</html>
+

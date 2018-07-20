@@ -1,0 +1,155 @@
+--qno1
+create trigger cannot_delete
+on Students
+instead of delete
+as 
+begin
+print'You do not have permission to delete the student '
+end
+--qno2
+create trigger cannot_insert
+on Courses
+instead of insert
+as 
+begin
+print'You do not have permission to insert a new course '
+end
+--qno4
+create trigger cannot_insert
+on Registration
+instead of insert
+as 
+begin
+if exists(select * from inserted i join ChallanForm c on i.RollNumber=c.RollNumber where c.TotalDues>20000 and c.Status='Pending')
+begin 
+print'you have to pay the pending fees first pal'
+end
+else
+begin 
+
+declare @sem varchar(15),@roll varchar(7),@courseid int,@sec varchar(1), @gpa_s float
+select @sem=Semester,@roll=RollNumber,@courseid=CourseID,@sec=Section,@gpa_s=GPA from inserted
+insert into Registration values(@sem,@roll,@courseid,@sec,@gpa_s)
+print'insertion successful'
+end
+
+end
+--qno5
+create trigger del_semester
+on Semester
+instead of delete 
+as
+begin
+if exists(select * from (select cs.Semester,sum(cs.AvailableSeats) as AvaSeats from Semester s join Courses_Semester cs on s.Semester=cs.Semester group by cs.Semester ) semester_seats join deleted on semester_seats.Semester=deleted.Semester where semester_seats.AvaSeats>=10)
+begin
+declare @smes varchar(15)
+select @smes=deleted.Semester from deleted
+delete from Semester  where [Semester].Semester=@smes
+print'Successfully deleted '
+
+end
+else
+begin
+print'not possible'
+end
+
+end
+--qno6
+create trigger del_table_ins
+on database 
+for drop_table,alter_table 
+as 
+begin 
+print'you cannot modify or delete the table'
+end
+--qno3
+create table Notify(
+Notificationid int,
+Studentid varchar (7) foreign key references Students(RollNo) on delete cascade on update cascade,
+NotificationString varchar(100)
+)
+create trigger insert_stu_reg
+on Registration
+instead of insert
+as
+begin
+if exists(select * from Courses_Semester cs join inserted i on cs.CourseID=i.CourseID and cs.Section=i.Section)
+begin
+declare @rname varchar (7)
+select @rname=inserted.RollNumber from inserted
+if exists(select * from (select * from Courses c join inserted i on c.CourseID=i.CourseID)w join Registration r on r.CourseID=w.PrerequiteCourseID where @rname=r.RollNumber )
+begin 
+if exists(select * from inserted i join Courses_Semester cs on i.CourseID=cs.CourseID and i.Section=cs.Section and cs.AvailableSeats>0 )
+begin
+
+declare @sem varchar(15),@roll varchar(7),@courseid int,@sec varchar(1), @gpa_s float
+select @sem=Semester,@roll=RollNumber,@courseid=CourseID,@sec=Section,@gpa_s=GPA from inserted
+insert into Registration values(@sem,@roll,@courseid,@sec,@gpa_s)
+
+declare @n2 int,@r2 varchar(7),@ns2 varchar(100)
+select @r2=RollNumber from inserted
+if exists(select * from Notify)
+begin
+select @n2=1
+end
+else
+begin
+select @n2=Max(nf.Notificationid) from Notify nf
+set @n2=@n2+1
+end
+set @ns2='Registered'
+insert into Notify(@n2,@r2,@ns2)
+end
+
+
+end
+else
+--no prerequisite
+begin
+declare @n int,@r varchar(7),@ns varchar(100)
+select @r=RollNumber from inserted
+if exists(select * from Notify)
+begin
+select @n=1
+end
+else
+begin
+select @n=Max(nf.Notificationid) from Notify nf
+set @n=@n+1
+end
+set @ns='not registered'
+insert into Notify(@n,@r,@ns)
+end
+
+
+
+end
+else
+begin
+
+declare @n3 int,@r3 varchar(7),@ns3 varchar(100)
+select @r3=RollNumber from inserted
+if exists(select * from Notify)
+begin
+select @n3=1
+end
+else
+begin
+select @n3=Max(nf.Notificationid) from Notify nf
+set @n3=@n3+1
+end
+set @ns3='not registered'
+insert into Notify(@n3,@r3,@ns3)
+
+
+
+end
+
+
+
+
+
+
+
+end
+

@@ -1,0 +1,97 @@
+create database HR
+use HR
+
+create table COUNTRIES(
+C_ID int not null primary key,
+C_NAME varchar(40),
+R_ID int 
+)
+
+select * from COUNTRIES
+
+create table DEPARTMENTS(
+D_ID int not null primary key,
+D_NAME varchar(40),
+M_ID int,
+L_ID int 
+)
+
+create table EMPLOYEES(
+E_ID int not null primary key,
+E_FIRST_NAME varchar(40) not null ,
+E_LAST_NAME varchar(40) not null,
+E_EMAIL varchar(40) not null ,
+E_PHONE_NUMBER varchar(40),
+E_HIRE_DATE date not null ,
+J_ID int not null ,
+E_SALARY int not null ,
+E_COMMISSION_PCT float,
+M_ID int,
+D_ID int,
+)
+
+
+create table JOBS(
+J_ID int not null primary key,
+J_TITLE varchar(40) not null ,
+J_MIN_SALARY int not null ,
+J_MAX_SALARY int not null ,
+)
+
+create table JOB_HISTORY(
+E_ID int not null primary key,
+JH_START_DATE date not null ,
+JH_END_DATE date not null ,
+J_ID int not null,
+D_ID int,
+)
+
+create table LOCATIONS(
+L_ID int not null primary key,
+L_ADDRESS varchar(40),
+L_POSTAL_CODE varchar(40) ,
+L_CITY varchar(40) not null ,
+L_STATE_PROVINCE varchar(40),
+C_ID int,
+)
+
+create table REGIONS(
+R_ID int not null primary key,
+R_NAME varchar(40),
+)
+
+select * from EMPLOYEES
+
+
+ALTER TABLE COUNTRIES
+ADD CONSTRAINT FK_COUNTRIES_REGIONS
+FOREIGN KEY (R_ID) REFERENCES REGIONS(R_ID);
+
+ALTER TABLE DEPARTMENTS
+ADD CONSTRAINT FK_DEPARTMENTS_LOCATIONS
+FOREIGN KEY (L_ID) REFERENCES LOCATIONS(L_ID);
+
+ALTER TABLE EMPLOYEES
+ADD CONSTRAINT FK_EMPLOYEES_JOBS
+FOREIGN KEY (M_ID) REFERENCES JOBS(J_ID);
+
+ALTER TABLE EMPLOYEES
+ADD CONSTRAINT FK_EMPLOYEES_DEPARTMENTS
+FOREIGN KEY (D_ID) REFERENCES DEPARTMENTS(D_ID);
+
+ALTER TABLE EMPLOYEES
+ADD CONSTRAINT FK_EMPLOYEES_JOBS2
+FOREIGN KEY (J_ID) REFERENCES JOBS(J_ID);
+
+
+ALTER TABLE JOB_HISTORY
+ADD CONSTRAINT FK_JOB_HISTORY_JOBS
+FOREIGN KEY (J_ID) REFERENCES JOBS(J_ID);
+
+ALTER TABLE JOB_HISTORY
+ADD CONSTRAINT FK_JOB_HISTORY_DEPARTMENTS
+FOREIGN KEY (D_ID) REFERENCES DEPARTMENTS(D_ID);
+
+ALTER TABLE LOCATIONS
+ADD CONSTRAINT FK_LOCATIONS_COUNTRIES
+FOREIGN KEY (C_ID) REFERENCES COUNTRIES(C_ID);

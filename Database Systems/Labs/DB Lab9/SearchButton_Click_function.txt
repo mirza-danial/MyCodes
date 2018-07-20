@@ -1,0 +1,18 @@
+ protected void SearchButton_Click(object sender, EventArgs e)
+        {
+            myDAL objmyDAl = new myDAL();
+            String InputName= Name.Text;
+            DataTable DT= new DataTable();
+            int found;
+            found= objmyDAl.SearchStudentByName_DAL(InputName,ref DT);
+            if (found!=1)
+            {
+            Message.Text ="There was some error";
+            }
+            else
+            {
+                Message.Text="Following Students are found";
+                SearchResultGrid.DataSource = DT;
+                SearchResultGrid.DataBind();
+            }            
+        }

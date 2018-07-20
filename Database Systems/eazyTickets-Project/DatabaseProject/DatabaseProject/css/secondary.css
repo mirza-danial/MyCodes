@@ -1,0 +1,73 @@
+﻿body {
+    background-color: whitesmoke;
+}
+
+.navbar {
+    min-height: 80px;
+    background-color: #1f2833 !important;
+}
+
+.nothide {
+    display: none;
+}
+
+.badge {
+    font-size: 15px !important;
+}
+
+.nav-link {
+    color: white !important;
+    font-size: larger !important;
+    padding-right: 20px !important;
+    padding-left: 20px !important;
+}
+
+    .nav-link:hover {
+        color: #66fcf1 !important;
+        font-size: larger !important;
+        padding-right: 20px !important;
+        padding-left: 20px !important;
+    }
+
+.cart {
+    color: white !important;
+    padding-right: 40px !important;
+}
+
+    .cart:hover {
+        color: #66fcf1 !important;
+        padding-right: 40px !important;
+    }
+
+.navbar-brand {
+    padding: 0 15px;
+    height: 80px;
+    line-height: 80px;
+}
+
+.navbar-toggle {
+    /* (80px - button height 34px) / 2 = 23px */
+    margin-top: 23px;
+    padding: 9px 10px !important;
+}
+
+@media (min-width: 900px) {
+    .navbar-nav > li > a {
+        /* (80px - line-height of 27px) / 2 = 26.5px */
+        padding-top: 26.5px;
+        padding-bottom: 26.5px;
+        line-height: 27px;
+    }
+}
+
+.carousel-image {
+    width: 100%;
+    height: 400px;
+}
+
+.logo {
+    width: 200px;
+}
+.bg-dark {
+    background-color: #1f2833 !important;
+}

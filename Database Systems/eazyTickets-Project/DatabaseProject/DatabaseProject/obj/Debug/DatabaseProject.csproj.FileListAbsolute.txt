@@ -1,0 +1,7 @@
+C:\Users\Danial\Documents\Visual Studio 2017\Projects\DatabaseProject\DatabaseProject\bin\DatabaseProject.dll.config
+C:\Users\Danial\Documents\Visual Studio 2017\Projects\DatabaseProject\DatabaseProject\bin\DatabaseProject.dll
+C:\Users\Danial\Documents\Visual Studio 2017\Projects\DatabaseProject\DatabaseProject\bin\DatabaseProject.pdb
+C:\Users\Danial\Documents\Visual Studio 2017\Projects\DatabaseProject\DatabaseProject\obj\Debug\DatabaseProject.csprojResolveAssemblyReference.cache
+C:\Users\Danial\Documents\Visual Studio 2017\Projects\DatabaseProject\DatabaseProject\obj\Debug\DatabaseProject.csproj.CoreCompileInputs.cache
+C:\Users\Danial\Documents\Visual Studio 2017\Projects\DatabaseProject\DatabaseProject\obj\Debug\DatabaseProject.dll
+C:\Users\Danial\Documents\Visual Studio 2017\Projects\DatabaseProject\DatabaseProject\obj\Debug\DatabaseProject.pdb

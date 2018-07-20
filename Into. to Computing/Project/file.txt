@@ -1,0 +1,15 @@
+fd 100
+rt 90
+fd 100
+color pink
+width 2
+fd100
+pu
+rt90
+fd 100
+rt180
+circle
+circle 50
+repeat 4[fd 100 rt90]
+pd
+repeat 4[fd100 rt90]

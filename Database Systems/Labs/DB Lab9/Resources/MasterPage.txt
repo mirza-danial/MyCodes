@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+
+<head runat="server">
+   
+   <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <title> </title>
+
+<link href="tooplate_style.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="css/coda-slider.css" type="text/css" charset="utf-8" />
+</head>
+<body>
+    <form id="form1" runat="server">
+   
+        <div id="slider">
+	<div id="tooplate_wrapper">
+        <div id="tooplate_sidebar">
+		
+            <div id="header">
+                <h1><img src="images/tooplate_logo.png" title="Notebook Template - tooplate.com" alt="Notebook free html template" /></h1>
+            </div>    
+		
+            <div id="menu">
+                <ul class="navigation">
+                    <li><a href="Home.aspx" class="selected menu_01">Home</a></li>
+                    <li><a href="AboutUs.aspx" class="menu_02">About Us</a></li>
+                    <li><a href="MyService.aspx"class="menu_03">Services</a> </li>
+                </ul>
+            </div>
+		</div> <!-- end of sidebar -->  
+     	  <div id="content">
+      <div>
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+        This is my master Page
+        </asp:ContentPlaceHolder>
+    </div>
+          </div>
+       
+		</div>
+</div>
+<div id="footer">
+	<div id="social_box">
+		<a href="#"><img src="images/facebook.png" alt="facebook" /></a>
+        <a href="#"><img src="images/flickr.png" alt="flickr" /></a>
+        <a href="#"><img src="images/myspace.png" alt="myspace" /></a>
+        <a href="#"><img src="images/twitter.png" alt="twitter" /></a>
+        <a href="#"><img src="images/youtube.png" alt="youtube" /></a>
+    </div>
+</div>
+
+    </form>
+</body>
+</html>
